@@ -2,16 +2,11 @@
 
 clear all
 addpath('utils')
-%close all
-%clc
 
 %% Paths and estimations
-path_dir = '/hdd/projects/zakaria_retrieval/AffineEstimation/lua/relative_camera_pose_est/results';
-source_dir = '/hdd/projects/zakaria_retrieval/AffineEstimation/lua/relative_camera_pose_est/precomputed_data/new_parameterization';
-%results_dir = '/hdd/projects/zakaria_retrieval/AffineEstimation/lua/relative_camera_pose_est/results';
-%file_id = fopen(strcat(path_dir, '/', 'NN_test_pairs.txt'));
-%file_id = fopen(strcat(source_dir, '/', 'NN_test_pairs_Whiten.txt'));
-file_id = fopen(strcat(source_dir, '/', 'NN_test_pairs_trained_nw.txt'));
+file_id = fopen('cnn_part/data/NN_test_pairs_trained_nw.txt');
+% read predictions from bin-file quat_trans_3
+pred_file_id = fopen('cnn_part/results/results.bin', 'r');
 
 data_cells = textscan(file_id, '%s %s %d %d %d %f %f %f %f %f %f %f %f %f %f %f %f %f %f');
 translation_gt_q = [data_cells{1,4+2} data_cells{1,5+2} data_cells{1,6+2}];
@@ -23,13 +18,6 @@ orientation_gt_db = [data_cells{1,14+2} data_cells{1,15+2} data_cells{1,16+2} ..
 
 number_of_pairs = size(translation_gt_q, 1);
 
-% read predictions from bin-file quat_trans_3
-%pred_file_id = fopen(strcat(path_dir, '/', 'resnet34_new_parametrization_WO_heads_rnd_crops_FLIPPING_rel_estimations_test_MSE_ep_155.bin'), 'r');
-pred_file_id = fopen(strcat(path_dir, '/', 'resnet34_new_parametrization_unnorm_all_scenes_hard_med_combined_rnd_crops_FLIPPING_NN_test_pairs_trained_nw_rel_estimations_test_MSE_ep_235.bin'), 'r');
-%pred_file_id = fopen(strcat(path_dir, '/', 'resnet34_new_parametrization_unnorm_all_scenes_hard_med_combined_rnd_crops_FLIPPING_NN_test_pairs_Whiten_rel_estimations_test_MSE_ep_235.bin'), 'r');
-%pred_file_id = fopen(strcat(path_dir, '/', 'resnet34_new_parametrization_unnorm_all_scenes_hard_med_combined_rnd_cropsrel_estimations_test_MSE_ep_180.bin'), 'r');
-% 'rel_estimations_rotation_fullSize_resnet32_ep_80.bin'), 'r');
-% resnet34_unnorm_transl_quaternions_all_scenes_not_APL_fc1024rel_estimations_test_MSE_ep_220
 estimations = fread(pred_file_id, [7 Inf], 'float')';
 fclose(file_id);
 fclose(pred_file_id);
