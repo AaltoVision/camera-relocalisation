@@ -68,9 +68,7 @@ for k=1:number_of_pairs
     %% estimations
     %------- rotation
     delR_est = quat2rotm(orientation_est(k,:) ./ norm(orientation_est(k,:)));
-%     R_q_est = R_db'*R_est;
     R_q_est = R_db*delR_est;
-%     R_q_est = R_q_est;
     %------- translation
     t_est_center = translation_est(k,:)./norm(translation_est(k,:)); % (C_i - C_j)
     t_est = (R_db'*t_est_center'); %R_j'(C_i - C_j)
@@ -120,7 +118,6 @@ for k=1:number_of_pairs
         NN_count = 0;
         allPairs = 0;
 
-%        
         %% inlier process for trans
         
         % NaN can arise when the translation direction of two NN db
@@ -275,155 +272,4 @@ fprintf('redkitchen: %.2f\n', redkitchen)
 fprintf('stairs: %.2f\n', stairs)
 fprintf('Mean averaged translation: %.2f m.\n', mean([chess fire heads office pumpkin redkitchen stairs]));
 
-nbins = 500;
-path_to_save = '/hdd/projects/zakaria_retrieval/AffineEstimation/papers_figures/data/ours';
-ch_oe_hist = histogram(err_quat(6001:8000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(6001:8000)), max(err_quat(6001:8000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(6001:8000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(6001:8000)), max(err_trans(6001:8000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_chess.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_chess.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
 
-ch_oe_hist = histogram(err_quat(1:2000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(1:2000)), max(err_quat(1:2000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(1:2000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(1:2000)), max(err_trans(1:2000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_fire.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_fire.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
-
-ch_oe_hist = histogram(err_quat(8001:9000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(8001:9000)), max(err_quat(8001:9000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(8001:9000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(8001:9000)), max(err_trans(8001:9000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_heads.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_heads.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
-
-ch_oe_hist = histogram(err_quat(2001:6000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(2001:6000)), max(err_quat(2001:6000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(2001:6000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(2001:6000)), max(err_trans(2001:6000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_office.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_office.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
-
-ch_oe_hist = histogram(err_quat(15001:17000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(15001:17000)), max(err_quat(15001:17000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(15001:17000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(15001:17000)), max(err_trans(15001:17000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_pumpkin.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_pumpkin.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
-
-
-ch_oe_hist = histogram(err_quat(10001:15000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(10001:15000)), max(err_quat(10001:15000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(10001:15000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(10001:15000)), max(err_trans(10001:15000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_redkitchen.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_redkitchen.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
-
-
-ch_oe_hist = histogram(err_quat(9001:10000), nbins);
-ch_oe = cumsum(ch_oe_hist.Values);
-tt_o = linspace(min(err_quat(9001:10000)), max(err_quat(9001:10000)), nbins);
-tt_v_o = ch_oe/max(ch_oe);
-ch_te_hist = histogram(err_trans(9001:10000), nbins);
-ch_te = cumsum(ch_te_hist.Values);
-tt_t = linspace(min(err_trans(9001:10000)), max(err_trans(9001:10000)), nbins);
-tt_v_t = ch_te/max(ch_te);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_q_cs_stairs.bin'), 'w');
-fwrite(chess_t_id, ch_oe/max(ch_oe), 'float');
-fclose(chess_t_id);
-chess_t_id = fopen(strcat(path_to_save, '/', 'ours_t_cs_stairs.bin'), 'w');
-fwrite(chess_t_id, ch_te/max(ch_te), 'float');
-fclose(chess_t_id);
-
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_chess.bin'), 'w');
-% fwrite(chess_q_id, err_quat(6001:8000), 'float');
-% fclose(chess_q_id);
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_fire.bin'), 'w');
-% fwrite(chess_q_id, err_quat(1:2000), 'float');
-% fclose(chess_q_id);
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_heads.bin'), 'w');
-% fwrite(chess_q_id, err_quat(8001:9000), 'float');
-% fclose(chess_q_id);
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_office.bin'), 'w');
-% fwrite(chess_q_id, err_quat(2001:6000), 'float');
-% fclose(chess_q_id);
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_pumpkin.bin'), 'w');
-% fwrite(chess_q_id, err_quat(15001:17000), 'float');
-% fclose(chess_q_id);
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_redkitchen.bin'), 'w');
-% fwrite(chess_q_id, err_quat(10001:15000), 'float');
-% fclose(chess_q_id);
-% chess_q_id = fopen(strcat(path, '/', 'ours_q_stairs.bin'), 'w');
-% fwrite(chess_q_id, err_quat(9001:10000), 'float');
-% fclose(chess_q_id);
-% 
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_chess.bin'), 'w');
-% fwrite(chess_t_id, err_trans(6001:8000), 'float');
-% fclose(chess_t_id);
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_fire.bin'), 'w');
-% fwrite(chess_t_id, err_trans(1:2000), 'float');
-% fclose(chess_t_id);
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_heads.bin'), 'w');
-% fwrite(chess_t_id, err_trans(8001:9000), 'float');
-% fclose(chess_t_id);
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_office.bin'), 'w');
-% fwrite(chess_t_id, err_trans(2001:6000), 'float');
-% fclose(chess_t_id);
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_pumpkin.bin'), 'w');
-% fwrite(chess_t_id, err_trans(15001:17000), 'float');
-% fclose(chess_t_id);
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_redkitchen.bin'), 'w');
-% fwrite(chess_t_id, err_trans(10001:15000), 'float');
-% fclose(chess_t_id);
-% chess_t_id = fopen(strcat(path, '/', 'ours_t_stairs.bin'), 'w');
-% fwrite(chess_t_id, err_trans(9001:10000), 'float');
-% fclose(chess_t_id);
