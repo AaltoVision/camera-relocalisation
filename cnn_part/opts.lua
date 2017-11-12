@@ -14,7 +14,7 @@ function M.parse(arg)
     cmd:option('-manualSeed',       333, 'Manually set RNG seed')
     ------------- Data options ------------------------
     cmd:option("-dataset_src_path", "/ssd_storage/projects/6dof_camera_pose_estimation/datasets/7_scenes/keep_aspect", "Image directory")
-    cmd:option("-precomputed_data_path", "/hdd/projects/zakaria_retrieval/AffineEstimation/lua/relative_camera_pose_est/precomputed_data/new_parameterization", "Path with meanstd info")
+    cmd:option("-precomputed_data_path", "./data", "Path with meanstd info")
     cmd:option("-model_zoo_path", "./pretrained_models", "ImageNet pretrained (others) networks directory (in order to fine-tune)")
     cmd:option("-snapshot_dir", "./snapshots", "snapshot directory")
     cmd:option("-weights", "", "pretrained model to begin training from")
