@@ -1,5 +1,5 @@
 
-Source code (Torch, MATLAB), models, and dataset for _Camera Relocalization by Computing Pairwise Relative Poses Using Convolutional Neural Network_ [link](http://openaccess.thecvf.com/content_ICCV_2017_workshops/papers/w17/Laskar_Camera_Relocalization_by_ICCV_2017_paper.pdf)
+Source code (Torch, MATLAB), models, and dataset for _Camera Relocalization by Computing Pairwise Relative Poses Using Convolutional Neural Network_ [link.](http://openaccess.thecvf.com/content_ICCV_2017_workshops/papers/w17/Laskar_Camera_Relocalization_by_ICCV_2017_paper.pdf)
 
 ## Getting Started
 In order to reproduce results presented in Table 1 of the original paper, please do the following:
