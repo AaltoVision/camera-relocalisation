@@ -5,7 +5,12 @@ In order to reproduce results presented in Table 1 of the original [paper](http:
  
 ```find . -name "*.color.png" | xargs -I {} convert {} -resize "256^>" {}```
 
-* Download trained weights from [here,](https://drive.google.com/uc?export=download&id=1T13xwXTLzxEHN_RF0i_0cvsetxX8H5vs) (md5sum: 15d0222e9737c3f558fad2e4d63f48d2)
+* Download trained weights from [here](https://drive.google.com/uc?export=download&id=1T13xwXTLzxEHN_RF0i_0cvsetxX8H5vs) (md5sum: 15d0222e9737c3f558fad2e4d63f48d2).
+* From ```cnn_part``` folder run:
+
+```th main.lua -weights /path/to/downloaded_weights/model_snapshot_7scenes.t7 -dataset_src_path /path/to/7Scenes -do_evaluation```
+By default, calculated features would be saved to ```cnn_part/results/results.bin```
+* To measure localisation performance run ```matlab filter_pose.m```
 
 # How to cite
 If you use this software in your own research, please cite our publication:
