@@ -57,9 +57,9 @@ function evaluation()
     local time = sys.clock()
     print(c.green '==>' .. " start evaluation after " .. (epoch_) .. " epoch(s)")
 
-    local ntest_batches = test_data_size_ / opt.test_batch_size
+    local ntest_batches = test_data_size_ / eval_batch_size_
 
-    local test_indices = torch.range(1, test_data_size_):long():split(opt.test_batch_size)
+    local test_indices = torch.range(1, test_data_size_):long():split(eval_batch_size_)
 
     cutorch.synchronize()
     model:evaluate()
@@ -74,8 +74,8 @@ function evaluation()
         collectgarbage()
 
         local outputs = model:forward({mini_batch_data[{{}, 1, {}, {}, {}}], mini_batch_data[{{}, 2, {}, {}, {}}]})
-        translation_estimations[{{(t-1) * opt.test_batch_size + 1, t * opt.test_batch_size}, {}}] = outputs[1]:float()
-        quaternion_estimations[{{ (t-1) * opt.test_batch_size + 1, t * opt.test_batch_size}, {}}] = outputs[2]:float()
+        translation_estimations[{{(t-1) * eval_batch_size_ + 1, t * eval_batch_size_}, {}}] = outputs[1]:float()
+        quaternion_estimations[{{ (t-1) * eval_batch_size_ + 1, t * eval_batch_size_}, {}}] = outputs[2]:float()
         cutorch.synchronize()
     end
     cutorch.synchronize()

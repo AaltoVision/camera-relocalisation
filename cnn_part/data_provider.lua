@@ -7,9 +7,20 @@ local c = require 'trepl.colorize'
 function init_data_provider()
     training_data_size_ = opt.training_dataset_size
     val_data_size_ = opt.validation_dataset_size
-    test_data_size_ = opt.test_dataset_size
+    
 
-    scenes_dicitionary_ = {[0] = 'chess', [1] = 'fire', [2] = 'heads', [3] = 'office', [4] = 'pumpkin', [5] = 'redkitchen', [6] = 'stairs'}
+    if opt.dataset_name == '7-Scenes' then
+        scenes_dicitionary_ = {[0] = 'chess', [1] = 'fire', [2] = 'heads', [3] = 'office', [4] = 'pumpkin', [5] = 'redkitchen', [6] = 'stairs'}
+        test_data_size_ = 85000 --number of lines in NN_7Scenes.txt file
+        eval_batch_size_ = 50   --should be a divisor of test_data_size_
+    elseif opt.dataset_name == 'University' then
+        scenes_dicitionary_ = {[0] = 'office', [1] = 'meeting', [2] = 'kitchen', [3] = 'conference'}
+        test_data_size_ = 19915  --number of lines in NN_university.txt file
+        eval_batch_size_ = 35    --should be a divisor of test_data_size_
+    else
+        print(c.red '==>' .. ' Dataset name is not correct. Check -dataset_name argument. Exit')
+        do return end
+    end
 
     -- loading precalculated mean and std of training dataset
     local mean_std_obj = { mean = { 0.485, 0.456, 0.406 }, std = { 0.229, 0.224, 0.225 },}
@@ -81,7 +92,15 @@ function load_testing_data()
     test_filenames_      = {}
     test_scene_id_       = torch.IntTensor(test_data_size_, 2)
 
-    local file = io.open(paths.concat(opt.precomputed_data_path, 'NN_test_pairs_trained_nw.txt'))
+    if opt.dataset_name == '7-Scenes' then
+        local file = io.open(paths.concat(opt.precomputed_data_path, 'NN_7scenes.txt'))
+    elseif opt.dataset_name == 'University' then
+        local file = io.open(paths.concat(opt.precomputed_data_path, 'NN_university.txt'))
+    else
+        print(c.red '==>' .. ' Dataset name is not correct. Check -dataset_name argument. Exit')
+        do return end
+    end
+    
 
     if file then
         local id = 1

@@ -28,8 +28,8 @@ translation_est = estimations(:, 5:end);
 %% main filtering stage
 
 % intialize variables
-orientation_err_deg = zeros(1, number_of_pairs);
-translation_err_deg = zeros(1, number_of_pairs);
+orientation_err_deg = 1000 .* zeros(1, number_of_pairs);
+translation_err_deg = 1000 .* zeros(1, number_of_pairs);
 
 NN_count = 0; % counter over the NN from 1 to |NN|(=5)
 allPairs = 0; % index to store the triangulated 3D camera locations
