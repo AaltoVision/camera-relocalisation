@@ -13,12 +13,19 @@ find . -name "*.color.png" | xargs -I {} convert {} -resize "256^>" {}
 ```
 th main.lua -weights <path/to/downloaded_weights/model_snapshot_7scenes.t7> -dataset_src_path </path/to/7Scenes> -do_evaluation
 ```
-By default, calculated features would be saved to ```cnn_part/results/results.bin```
+By default, calculated features would be saved to ```cnn_part/results/7scenes_res.bin```
 * To measure localisation performance run ```matlab filter_pose.m```
 
 ## University Dataset
+* The University dataset (~29Gb) is available at [here](https://drive.google.com/uc?export=download&id=1BUpZDDcphmwtlgb2I9JrpMo9p_8CrJJX) (md5sum: 6f512e6c55006c3f6fa0bf3f75f93284).
+* Resize images according to 7-Scenes dataset (keeping aspect ratio).
 * Download trained weights from [here](https://drive.google.com/uc?export=download&id=1cUc8IQVUxBmku1wBODUM82td8eRibC2Y) (md5sum: 227caa217653b48ffdf27a9826b838e5).
-*
+* From ```cnn_part``` folder run:
+```
+th main.lua -dataset_name University -weights <path/to/downloaded_weights/model_snapshot_university.t7> -dataset_src_path </path/to/University> -results_filename ./results/university_res.bin -do_evaluation
+```
+* To measure localisation performance run ```matlab filter_pose.m```
+
 ## How to cite
 If you use this software in your own research, please cite our publication:
 

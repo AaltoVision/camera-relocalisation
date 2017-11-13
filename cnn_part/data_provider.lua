@@ -92,10 +92,11 @@ function load_testing_data()
     test_filenames_      = {}
     test_scene_id_       = torch.IntTensor(test_data_size_, 2)
 
+    local file
     if opt.dataset_name == '7-Scenes' then
-        local file = io.open(paths.concat(opt.precomputed_data_path, 'NN_7scenes.txt'))
+        file = io.open(paths.concat(opt.precomputed_data_path, 'NN_7scenes.txt'))
     elseif opt.dataset_name == 'University' then
-        local file = io.open(paths.concat(opt.precomputed_data_path, 'NN_university.txt'))
+        file = io.open(paths.concat(opt.precomputed_data_path, 'NN_university.txt'))
     else
         print(c.red '==>' .. ' Dataset name is not correct. Check -dataset_name argument. Exit')
         do return end
