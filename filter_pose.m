@@ -1,12 +1,18 @@
 %% script to filter pose estimates from NN
-
 clear all
 addpath('utils')
 
-%% Paths and estimations
-file_id = fopen('cnn_part/data/NN_test_pairs_trained_nw.txt');
-% read predictions from bin-file quat_trans_3
+dataset_name = '7-Scenes'; % or 'University'
+% file id with estimates produced by CNN
 pred_file_id = fopen('cnn_part/results/results.bin', 'r');
+% getting GT file
+if strcmp(dataset_name, '7-Scenes')
+    file_id = fopen('cnn_part/data/NN_7scenes.txt');
+elseif strcmp(dataset_name, 'University')
+    file_id = fopen('cnn_part/data/NN_university.txt');
+else
+    error('Please, specify dataset_name variable properly [7-Scenes or University]');
+end
 
 data_cells = textscan(file_id, '%s %s %d %d %d %f %f %f %f %f %f %f %f %f %f %f %f %f %f');
 translation_gt_q = [data_cells{1,4+2} data_cells{1,5+2} data_cells{1,6+2}];
@@ -28,8 +34,8 @@ translation_est = estimations(:, 5:end);
 %% main filtering stage
 
 % intialize variables
-orientation_err_deg = 1000 .* zeros(1, number_of_pairs);
-translation_err_deg = 1000 .* zeros(1, number_of_pairs);
+orientation_err_deg = zeros(1, number_of_pairs);
+translation_err_deg = zeros(1, number_of_pairs);
 
 NN_count = 0; % counter over the NN from 1 to |NN|(=5)
 allPairs = 0; % index to store the triangulated 3D camera locations
@@ -238,38 +244,64 @@ for k=1:number_of_pairs
 end
 
 %% results
-chess = median(err_quat(6001:8000));
-fire = median(err_quat(1:2000));
-heads = median(err_quat(8001:9000));
-office = median(err_quat(2001:6000));
-pumpkin = median(err_quat(15001:17000));
-redkitchen = median(err_quat(10001:15000));
-stairs = median(err_quat(9001:10000));
-fprintf('Orientation error, deg:\n')
-fprintf('chess: %.2f\n', chess)
-fprintf('fire: %.2f\n', fire)
-fprintf('heads: %.2f\n', heads)
-fprintf('office: %.2f\n', office)
-fprintf('pumpkin: %.2f\n', pumpkin)
-fprintf('redkitchen: %.2f\n', redkitchen)
-fprintf('stairs: %.2f\n', stairs)
-fprintf('Mean averaged orientation: %.2f deg.\n', mean([chess fire heads office pumpkin redkitchen stairs]));
-fprintf('--------------------------------------------------------\n');
-chess = median(err_trans(6001:8000));
-fire = median(err_trans(1:2000));
-heads = median(err_trans(8001:9000));
-office = median(err_trans(2001:6000));
-pumpkin = median(err_trans(15001:17000));
-redkitchen = median(err_trans(10001:15000));
-stairs = median(err_trans(9001:10000));
-fprintf('Translation error, m:\n')
-fprintf('chess: %.2f\n', chess)
-fprintf('fire: %.2f\n', fire)
-fprintf('heads: %.2f\n', heads)
-fprintf('office: %.2f\n', office)
-fprintf('pumpkin: %.2f\n', pumpkin)
-fprintf('redkitchen: %.2f\n', redkitchen)
-fprintf('stairs: %.2f\n', stairs)
-fprintf('Mean averaged translation: %.2f m.\n', mean([chess fire heads office pumpkin redkitchen stairs]));
+if strcmp(dataset_name, '7-Scenes')
+    chess = median(err_quat(6001:8000));
+    fire = median(err_quat(1:2000));
+    heads = median(err_quat(8001:9000));
+    office = median(err_quat(2001:6000));
+    pumpkin = median(err_quat(15001:17000));
+    redkitchen = median(err_quat(10001:15000));
+    stairs = median(err_quat(9001:10000));
+    fprintf('Orientation error, deg:\n');
+    fprintf('chess: %.2f\n', chess);
+    fprintf('fire: %.2f\n', fire);
+    fprintf('heads: %.2f\n', heads);
+    fprintf('office: %.2f\n', office);
+    fprintf('pumpkin: %.2f\n', pumpkin);
+    fprintf('redkitchen: %.2f\n', redkitchen);
+    fprintf('stairs: %.2f\n', stairs);
+    fprintf('Mean averaged orientation: %.2f deg.\n', mean([chess fire heads office pumpkin redkitchen stairs]));
+    fprintf('--------------------------------------------------------\n');
+    chess = median(err_trans(6001:8000));
+    fire = median(err_trans(1:2000));
+    heads = median(err_trans(8001:9000));
+    office = median(err_trans(2001:6000));
+    pumpkin = median(err_trans(15001:17000));
+    redkitchen = median(err_trans(10001:15000));
+    stairs = median(err_trans(9001:10000));
+    fprintf('Translation error, m:\n');
+    fprintf('chess: %.2f\n', chess);
+    fprintf('fire: %.2f\n', fire);
+    fprintf('heads: %.2f\n', heads);
+    fprintf('office: %.2f\n', office);
+    fprintf('pumpkin: %.2f\n', pumpkin);
+    fprintf('redkitchen: %.2f\n', redkitchen);
+    fprintf('stairs: %.2f\n', stairs);
+    fprintf('Mean averaged translation: %.2f m.\n', mean([chess fire heads office pumpkin redkitchen stairs]));
+else
+    conference = median(err_quat(1:949));
+    kitchen1 = median(err_quat(950:1939));
+    meeting = median(err_quat(1940:2884));
+    office = median(err_quat(2885:end));
+    fprintf('Orientation error, deg:\n');
+    fprintf('office: %.2f\n', office);
+    fprintf('meeting: %.2f\n', meeting);
+    fprintf('kitchen1: %.2f\n', kitchen1);
+    fprintf('conference: %.2f\n', conference);
+    fprintf('Mean averaged orientation: %.2f deg.\n', mean([conference kitchen1 meeting office]));
+    fprintf('--------------------------------------------------------\n');
+    % translation
+    conference = median(err_trans(1:949));
+    kitchen1 = median(err_trans(950:1939));
+    meeting = median(err_trans(1940:2884));
+    office = median(err_trans(2885:end));
+    fprintf('Translation error, m:\n');
+    fprintf('office: %.2f\n', office);
+    fprintf('meeting: %.2f\n', meeting);
+    fprintf('kitchen1: %.2f\n', kitchen1);
+    fprintf('conference: %.2f\n', conference);
+    fprintf('Mean averaged translation: %.2f m.\n', mean([chess fire heads office pumpkin redkitchen stairs]));
+end
+
 
 
