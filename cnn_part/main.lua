@@ -72,11 +72,12 @@ if opt.do_evaluation then
     do return end
 end
 
-if not paths.dirp(opt.logs) then
-    paths.mkdir(opt.logs)
+if not paths.dirname(opt.logs) then
+    paths.mkdir(paths.dirname(opt.logs))
 end
 
-logger = optim.Logger(paths.concat(opt.logs, preamble .. '_' .. '[' .. opt.epoch_number .. ',' .. opt.max_epoch .. '].log'))
+--logger = optim.Logger(paths.concat(opt.logs, preamble .. '_' .. '[' .. opt.epoch_number .. ',' .. opt.max_epoch .. '].log'))
+logger = optim.Logger(opt.logs)
 
 for i = opt.epoch_number,opt.max_epoch do
     if epoch_ == 31 then

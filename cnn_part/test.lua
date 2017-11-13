@@ -86,10 +86,11 @@ function evaluation()
     print(c.green '==>' .. " time taken for test = " .. (time) .. " s")
 
     --save results
-    if not paths.dirp(opt.path_results) then
-        paths.mkdir(opt.path_results)
+    if not paths.dirname(opt.results_filename) then
+        paths.mkdir(paths.dirname(opt.results_filename))
     end
-    local results_file = torch.DiskFile(paths.concat(opt.path_results, 'results.bin'), 'w'):binary()
+    
+    local results_file = torch.DiskFile(opt.results_filename, 'w'):binary()
  
     local results = torch.cat(quaternion_estimations, translation_estimations, 2)
     results_file:writeFloat(results:storage())

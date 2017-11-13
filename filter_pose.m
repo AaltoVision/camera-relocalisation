@@ -4,7 +4,7 @@ addpath('utils')
 
 dataset_name = '7-Scenes'; % or 'University'
 % file id with estimates produced by CNN
-pred_file_id = fopen('cnn_part/results/results.bin', 'r');
+pred_file_id = fopen('cnn_part/results/7scenes_res.bin', 'r');
 % getting GT file
 if strcmp(dataset_name, '7-Scenes')
     file_id = fopen('cnn_part/data/NN_7scenes.txt');
