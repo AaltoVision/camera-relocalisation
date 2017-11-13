@@ -24,7 +24,7 @@ By default, calculated features would be saved to ```cnn_part/results/7scenes_re
 ```
 th main.lua -dataset_name University -weights <path/to/downloaded_weights/model_snapshot_university.t7> -dataset_src_path </path/to/University> -results_filename ./results/university_res.bin -do_evaluation
 ```
-* To measure localisation performance run ```matlab filter_pose.m```
+* To measure localisation performance open ```filter_pose.m``` and change ```pred_file_id``` to a binary file with estimates, i.e ```cnn_part/results/university_res.bin```
 
 ## How to cite
 If you use this software in your own research, please cite our publication:
