@@ -17,7 +17,7 @@ By default, calculated features would be saved to ```cnn_part/results/7scenes_re
 * To measure localisation performance run ```matlab filter_pose.m```
 
 ## University Dataset
-* The University dataset (~29Gb) is available at [here](https://drive.google.com/uc?export=download&id=1BUpZDDcphmwtlgb2I9JrpMo9p_8CrJJX) (md5sum: 6f512e6c55006c3f6fa0bf3f75f93284).
+* The University dataset (~29Gb) is available [here](https://drive.google.com/uc?export=download&id=1BUpZDDcphmwtlgb2I9JrpMo9p_8CrJJX) (md5sum: 6f512e6c55006c3f6fa0bf3f75f93284).
 * Resize images according to 7-Scenes dataset (keeping aspect ratio).
 * Download trained weights from [here](https://drive.google.com/uc?export=download&id=1cUc8IQVUxBmku1wBODUM82td8eRibC2Y) (md5sum: 227caa217653b48ffdf27a9826b838e5).
 * From ```cnn_part``` folder run:
