@@ -17,7 +17,8 @@ By default, calculated features would be saved to ```cnn_part/results/results.bi
 * To measure localisation performance run ```matlab filter_pose.m```
 
 ## University Dataset
-
+* Download trained weights from [here](https://drive.google.com/uc?export=download&id=1cUc8IQVUxBmku1wBODUM82td8eRibC2Y) (md5sum: 227caa217653b48ffdf27a9826b838e5).
+*
 ## How to cite
 If you use this software in your own research, please cite our publication:
 
