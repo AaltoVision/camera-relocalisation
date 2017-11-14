@@ -35,7 +35,7 @@ Office|0.48m, 7.68deg|0.30m, 8.08deg|0.26m, N/A|0.21m, 7.35deg
 Pumpkin|0.47m, 8.42deg|0.33m, 7.00deg|0.36m, N/A|0.24m, 6.35deg
 Red Kitchen|0.59m, 8.64deg|0.37m, 8.83deg|0.31m, N/A|0.24m, 8.03deg
 Stairs|0.47m, 13.8deg|0.40m, 13.7deg|0.26m, N/A|0.27m, 11.82deg
-Average|*0.44m*, *10.4deg*|*0.31m*, *9.85deg*|*0.25m*, *N/A*|*0.21m*, *9.30deg*
+Average|**0.44m**, **10.4deg**|**0.31m**, **9.85deg**|**0.25m**, **N/A**|**0.21m**, **9.30deg**
 ## How to cite
 If you use this software in your own research, please cite our publication:
 
