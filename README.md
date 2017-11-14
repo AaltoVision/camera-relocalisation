@@ -16,7 +16,7 @@ th main.lua -weights <path/to/downloaded_weights/model_snapshot_7scenes.t7> -dat
 By default, calculated features would be saved to ```cnn_part/results/7scenes_res.bin```
 * To measure localisation performance run ```matlab filter_pose.m```
 
-scene|[PoseNet](https://github.com/alexgkendall/caffe-posenet)|LSTM-Pose [paper](http://openaccess.thecvf.com/content_ICCV_2017/papers/Walch_Image-Based_Localization_Using_ICCV_2017_paper.pdf)|VidLoc [paper](http://openaccess.thecvf.com/content_cvpr_2017/papers/Clark_VidLoc_A_Deep_CVPR_2017_paper.pdf)|Ours
+scene|[PoseNet](https://github.com/alexgkendall/caffe-posenet)|LSTM-Pose [[paper]](http://openaccess.thecvf.com/content_ICCV_2017/papers/Walch_Image-Based_Localization_Using_ICCV_2017_paper.pdf)|VidLoc [paper](http://openaccess.thecvf.com/content_cvpr_2017/papers/Clark_VidLoc_A_Deep_CVPR_2017_paper.pdf)|Ours
 :---|:---:|:---:|:---:|:---:
 Chess|0.32m, 8.12deg|0.24m, 5.77deg|0.18m, N/A|0.13m, 6.46deg
 Fire |0.47m, 14.4deg|0.34m, 11.9deg|0.26m, N/A|0.26m, 12.72deg
