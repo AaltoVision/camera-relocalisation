@@ -47,7 +47,7 @@ function load_training_data()
     train_translation_gt_ = torch.Tensor(training_data_size_, 3)
     train_quaternions_gt_ = torch.Tensor(training_data_size_, 4)
 
-    local file = io.open(paths.concat(opt.precomputed_data_path, 'NN_test_pairs_trained_nw.txt'))
+    local file = io.open(paths.concat(opt.precomputed_data_path, 'db_all_med_hard_train.txt'))
  
     if file then
         local id = 1
@@ -70,7 +70,7 @@ function load_validation_data()
     val_translation_gt_ = torch.Tensor(val_data_size_, 3)
     val_quaternions_gt_ = torch.Tensor(val_data_size_, 4)
 
-    local file = io.open(paths.concat(opt.precomputed_data_path, 'db_all_med_hard_wo_heads_valid.txt'))
+    local file = io.open(paths.concat(opt.precomputed_data_path, 'db_all_med_hard_valid.txt'))
 
     if file then
         local id = 1
