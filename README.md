@@ -1,3 +1,5 @@
+## New!!!
+We have released a PyTorch implementation of the method for relative camera pose estimation. The code and pre-trained models are available at https://github.com/AaltoVision/RelPoseNet
 
 Source code (Torch, MATLAB), models, and dataset for _Camera Relocalization by Computing Pairwise Relative Poses Using Convolutional Neural Network_ [link.](http://openaccess.thecvf.com/content_ICCV_2017_workshops/papers/w17/Laskar_Camera_Relocalization_by_ICCV_2017_paper.pdf)
 
